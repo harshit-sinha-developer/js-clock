@@ -1,0 +1,1 @@
+This is a Jquery Analog Clock Plugin. Currently under development
