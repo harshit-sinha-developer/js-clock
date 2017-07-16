@@ -113,6 +113,7 @@ var ClockApp = exports.ClockApp = function () {
             var canvasWidth = this.options.width;
             var ctx = this.clockCanvas.getContext('2d');
             _canvas.ShapeUtils.drawRing(ctx, canvasWidth / 2, canvasHeight / 2, 120, 130, true);
+            _canvas.ShapeUtils.drawRing(ctx, canvasWidth / 2, canvasHeight / 2, 5, 10, true);
         }
     }]);
 

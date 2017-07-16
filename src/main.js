@@ -21,5 +21,6 @@ export class ClockApp {
         let canvasWidth = this.options.width;
         let ctx = this.clockCanvas.getContext('2d');
         ShapeUtils.drawRing(ctx, canvasWidth/2, canvasHeight/2, 120, 130, true);
+        ShapeUtils.drawRing(ctx, canvasWidth/2, canvasHeight/2, 5, 10, true);
     }
 }
