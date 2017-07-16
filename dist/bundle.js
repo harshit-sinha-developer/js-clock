@@ -82,21 +82,37 @@ var _jquery = __webpack_require__(1);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
+var _canvas = __webpack_require__(2);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ClockApp = exports.ClockApp = function () {
-    function ClockApp() {
+    function ClockApp(rootElement, options) {
         _classCallCheck(this, ClockApp);
+
+        this.clockCanvas = null;
+        this.options = options;
+        this.initClock(rootElement);
+        this.draw();
     }
 
     _createClass(ClockApp, [{
         key: "initClock",
-        value: function initClock(rootElement, options) {
+        value: function initClock(rootElement) {
             var $clockContainer = (0, _jquery2.default)('<div class="jq-clock"></div>');
-            var $clockCanvas = (0, _jquery2.default)("<canvas width=\"" + options.width + "\" height=\"" + options.height + "\"><canvas>");
+            var $clockCanvas = (0, _jquery2.default)("<canvas width=\"" + this.options.width + "\" height=\"" + this.options.height + "\"></canvas>");
             (0, _jquery2.default)(rootElement).append($clockContainer).append($clockCanvas);
+            this.clockCanvas = $clockCanvas[0];
+        }
+    }, {
+        key: "draw",
+        value: function draw() {
+            var canvasHeight = this.options.height;
+            var canvasWidth = this.options.width;
+            var ctx = this.clockCanvas.getContext('2d');
+            _canvas.ShapeUtils.drawRing(ctx, canvasWidth / 2, canvasHeight / 2, 80, 100, false);
         }
     }]);
 
@@ -10363,5 +10379,58 @@ return jQuery;
 } );
 
 
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var ShapeUtils = exports.ShapeUtils = function () {
+    function ShapeUtils() {
+        _classCallCheck(this, ShapeUtils);
+    }
+
+    _createClass(ShapeUtils, null, [{
+        key: "drawCircle",
+        value: function drawCircle(context, x_center, y_center, radius) {
+            context.beginPath();
+            context.arc(x_center, y_center, radius, 0, 2 * Math.PI);
+            context.stroke();
+        }
+    }, {
+        key: "plotPoint",
+        value: function plotPoint(context, x, y) {
+            context.fillRect(x, y, 1, 1);
+        }
+    }, {
+        key: "drawRing",
+        value: function drawRing(context, x_center, y_center, innerRadius, outerRadius, fillRing) {
+            if (fillRing) {
+                var avgRadius = (innerRadius + outerRadius) / 2;
+                var width = outerRadius - innerRadius;
+                context.beginPath();
+                context.arc(x_center, y_center, avgRadius, 0, 2 * Math.PI);
+                context.lineWidth = width;
+                context.stroke();
+            } else {
+                ShapeUtils.drawCircle(context, x_center, y_center, innerRadius);
+                ShapeUtils.drawCircle(context, x_center, y_center, outerRadius);
+            }
+        }
+    }]);
+
+    return ShapeUtils;
+}();
+
 /***/ })
 /******/ ]);
+//# sourceMappingURL=bundle.js.map
