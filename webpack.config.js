@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    entry: './src/main.js',
+    entry: './src/clockApp.js',
     output: {
         // Webpack prefers an absolute path:
         path: path.resolve(__dirname, './dist'),
@@ -24,6 +24,5 @@ module.exports = {
             }
         ]
     },
-    watch: true,
     devtool: 'source-map'
 }
