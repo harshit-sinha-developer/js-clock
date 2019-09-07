@@ -1,6 +1,6 @@
 # Analog Clock Widget
 An Analog Clock Plugin Widget<br/>
-![Alt Text](https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/jq-clock.gif)
+![Alt Text](https://raw.githubusercontent.com/harshit-sinha-developer/js-clock/master/resources/jq-clock.gif)
 
 ## Getting Started
 1. Download the file - https://github.com/harshit-sinha-developer/jq-clock/blob/master/dist/bundle.min.js  
@@ -116,15 +116,15 @@ let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config)
 ```
 ##### Supported Predefined faces
 1. FACE_0
-<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_0.png" width="140" height="140" />
+<img src="https://raw.githubusercontent.com/harshit-sinha-developer/js-clock/master/resources/FACE_0.png" width="140" height="140" />
 2. FACE_1
-<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_1.png" width="140" height="140" />
+<img src="https://raw.githubusercontent.com/harshit-sinha-developer/js-clock/master/resources/FACE_1.png" width="140" height="140" />
 3. FACE_2
-<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_2.png" width="140" height="140" />
+<img src="https://raw.githubusercontent.com/harshit-sinha-developer/js-clock/master/resources/FACE_2.png" width="140" height="140" />
 4. FACE_3
-<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_3.png" width="140" height="140" />
+<img src="https://raw.githubusercontent.com/harshit-sinha-developer/js-clock/master/resources/FACE_3.png" width="140" height="140" />
 5. FACE_4
-<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_4.png" width="140" height="140" />
+<img src="https://raw.githubusercontent.com/harshit-sinha-developer/js-clock/master/resources/FACE_4.png" width="140" height="140" />
 
 Examples - [Refer](https://github.com/harshit-sinha-developer/jq-clock/blob/master/src/faces/config.js)
 ##### Supported Face Config Properties

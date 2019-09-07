@@ -1,5 +1,5 @@
 {
-  "name": "js-clock",
+  "name": "js-easy-clock",
   "version": "0.0.1",
   "description": "A jquery plugin for an analog clock",
   "main": "./dist/bundle.min.js",
