@@ -38,7 +38,7 @@ clock.configure(config);
          <th>Property Name</th>
          <th>Description</th>
          <th>Default</th>
-         <th>Type / Supported Values</th>
+         <th>Supported Values</th>
       </tr>
    </thead>
    <tbody>
@@ -57,7 +57,7 @@ clock.configure(config);
       <tr>
          <td>color</td>
          <td>Background color of the clock</td>
-         <td>'#FFFFFF'</td>
+         <td>#FFFFFF</td>
          <td>String (Hexcode)</td>
       </tr>
       <tr>
@@ -69,14 +69,14 @@ clock.configure(config);
       <tr>
          <td>watchFace</td>
          <td>Watch Face selected from a list of predefined watchFaces</td>
-         <td>'FACE_1'</td>
-         <td>'FACE_1', 'FACE_2', 'FACE_3'</td>
+         <td>FACE_1</td>
+         <td>[Refer](https://github.com/harshit-sinha-developer/jq-clock#watch-faces)</td>
       </tr>
       <tr>
          <td>faceConfig</td>
          <td>Custom Watch faceconfig</td>
-         <td>FACE_1 config</td>
-         <td>Object</td>
+         <td>Empty</td>
+         <td>[Refer](https://github.com/harshit-sinha-developer/jq-clock#watch-faces)</td>
       </tr>
       <tr>
          <td>displayTime</td>
@@ -142,19 +142,19 @@ Examples - [Refer](https://github.com/harshit-sinha-developer/jq-clock/blob/mast
       <tr>
          <td>hingeColor</td>
          <td>color of central hinge of the clock</td>
-         <td>#333'</td>
+         <td>#333</td>
          <td>color hexcode</td>
       </tr>
       <tr>
          <td>handColor</td>
          <td>color of hands of the clock</td>
-         <td>#333'</td>
+         <td>#333</td>
          <td>color hexcode</td>
       </tr>
       <tr>
          <td>frameColor</td>
          <td>color of frame of the clock</td>
-         <td>#333'</td>
+         <td>#333</td>
          <td>color hexcode</td>
       </tr>
       <tr>
