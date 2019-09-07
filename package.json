@@ -1,6 +1,6 @@
 {
   "name": "js-easy-clock",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A jquery plugin for an analog clock",
   "main": "./dist/bundle.min.js",
   "scripts": {
@@ -32,5 +32,6 @@
   },
   "dependencies": {
     "jquery": "3.4.1"
-  }
+  },
+  "keywords": ["js-clock", "js-easy-clock", "clock", "analog-clock"]
 }
