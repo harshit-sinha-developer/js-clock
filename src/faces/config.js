@@ -6,18 +6,18 @@ export const faceConfig = {
         "handColor": "#333"
     },
     "FACE_1": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ['#333', '#FFFFFF', '#333'],
         "hingeColor": '#333',
         "handColor": "#333"
     },
     "FACE_2": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
         "hingeColor": '#660000'
     },
     "FACE_3": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
         "hingeColor": '#660000',
         "numberColors": {
@@ -36,7 +36,7 @@ export const faceConfig = {
         }
     },
     "FACE_4": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ["#ff0000","#00ff00","#0000ff"],
         "hingeColor": "#660000",
         "numberColors": {

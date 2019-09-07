@@ -10995,7 +10995,7 @@ var SimpleFace = exports.SimpleFace = function () {
         key: "render",
         value: function render() {
             this._outerCircle.render();
-            if (this._isBorderFilled && this._faceConfig.isGradient) {
+            if (this._isBorderFilled && this._faceConfig.isFrameGradient) {
                 var colorGradientStopPoints = this._faceConfig.frameGradientColorList || _defaultProperties.DEFAULT_PROPERTIES.frameGradientColorList;
                 var grad = this._context.createRadialGradient(this._xCenter, this._yCenter, this._radius * 0.95, this._xCenter, this._yCenter, this._radius * 1.05);
                 for (var i = 0; i < colorGradientStopPoints.length; i++) {
@@ -11079,18 +11079,18 @@ var faceConfig = exports.faceConfig = {
         "handColor": "#333"
     },
     "FACE_1": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ['#333', '#FFFFFF', '#333'],
         "hingeColor": '#333',
         "handColor": "#333"
     },
     "FACE_2": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
         "hingeColor": '#660000'
     },
     "FACE_3": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
         "hingeColor": '#660000',
         "numberColors": {
@@ -11109,7 +11109,7 @@ var faceConfig = exports.faceConfig = {
         }
     },
     "FACE_4": {
-        "isGradient": true,
+        "isFrameGradient": true,
         "frameGradientColorList": ["#ff0000", "#00ff00", "#0000ff"],
         "hingeColor": "#660000",
         "numberColors": {

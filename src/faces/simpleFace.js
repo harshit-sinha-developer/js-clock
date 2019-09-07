@@ -34,7 +34,7 @@ export class SimpleFace {
 
     render() {
         this._outerCircle.render();
-        if(this._isBorderFilled && this._faceConfig.isGradient) {
+        if(this._isBorderFilled && this._faceConfig.isFrameGradient) {
             let colorGradientStopPoints = this._faceConfig.frameGradientColorList || DEFAULT_PROPERTIES.frameGradientColorList;
             const grad = this._context.createRadialGradient(this._xCenter, this._yCenter ,this._radius * 0.95, this._xCenter, this._yCenter, this._radius * 1.05);
             for(let i = 0; i < colorGradientStopPoints.length; i++) {

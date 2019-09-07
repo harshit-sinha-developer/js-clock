@@ -25,6 +25,12 @@ Pass configurations to the widget while initialization
 const config = { width:  500, height:  500, radius:  200, watchFace:  'FACE_3' };
 let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config);
 ```
+Alternatively configuration can also be done using configure function
+```
+const config = { width:  500, height:  500, radius:  200, watchFace:  'FACE_3' };
+let clock = new ClockWidget.ClockApp(document.getElementById('myClock'));
+clock.configure(config);
+```
 #### Suported Properties
 <table>
    <thead>
@@ -61,12 +67,6 @@ let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config)
          <td>Number</td>
       </tr>
       <tr>
-         <td>isBorderFilled</td>
-         <td>whether the clock border is to be filled with color</td>
-         <td>true</td>
-         <td>boolean</td>
-      </tr>
-      <tr>
          <td>watchFace</td>
          <td>Watch Face selected from a list of predefined watchFaces</td>
          <td>'FACE_1'</td>
@@ -89,6 +89,85 @@ let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config)
          <td>When set to true displays a constant time on the watch (displayTime)</td>
          <td>false</td>
          <td>boolean</td>
+      </tr>
+   </tbody>
+</table>
+
+#### Watch Faces
+The watch can be configured using the config property - faceConfg
+Sample Face Config -
+```
+const faceConfig = {
+    "isFrameGradient": true,
+    "frameGradientColorList": ['#333', '#FFFFFF', '#333'],
+    "hingeColor": '#333',
+    "handColor": "#333"
+}
+let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), { width:  500, height:  500, radius:  200, faceConfig: faceConfig });
+```
+Additionally there are some predefined watch faces as which can be used using property - watchFace
+```
+const config = {
+    width: 500,
+    height: 500,
+    radius: 200,
+    watchFace: 'FACE_3' // supported values ['FACE_0', 'FACE_1', 'FACE_2', 'FACE_3', 'FACE_4']
+}
+let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config);
+```
+Examples - [Refer](https://github.com/harshit-sinha-developer/jq-clock/blob/master/src/faces/config.js)
+##### Supported Face Config Properties
+<table>
+   <thead>
+      <tr>
+         <th>Property Name</th>
+         <th>Description</th>
+         <th>Default</th>
+         <th>Type / Supported Values</th>
+      </tr>
+   </thead>
+   <tbody>
+      <tr>
+         <td>isFrameGradient</td>
+         <td>Specifies if clock's frame should have a color gradient pattern</td>
+         <td>false</td>
+         <td>boolean</td>
+      </tr>
+      <tr>
+         <td>frameGradientColorList</td>
+         <td>Specifies gradient color points list, this list is used to generate gradient</td>
+         <td>['#333', '#FFFFFF', '#333']</td>
+         <td>list of color hexcodes</td>
+      </tr>
+      <tr>
+         <td>hingeColor</td>
+         <td>color of central hinge of the clock</td>
+         <td>#333'</td>
+         <td>color hexcode</td>
+      </tr>
+      <tr>
+         <td>handColor</td>
+         <td>color of hands of the clock</td>
+         <td>#333'</td>
+         <td>color hexcode</td>
+      </tr>
+      <tr>
+         <td>frameColor</td>
+         <td>color of frame of the clock</td>
+         <td>#333'</td>
+         <td>color hexcode</td>
+      </tr>
+      <tr>
+         <td>isBorderFilled</td>
+         <td>specifies if the frame of the clock is filled with frame color or empty</td>
+         <td>true</td>
+         <td>boolean</td>
+      </tr>
+      <tr>
+         <td>numberColors</td>
+         <td>a map where key is the number displayed on the clock and value is color of the that number</td>
+         <td>empty - all colors set to '#333'</td>
+         <td>map</td>
       </tr>
    </tbody>
 </table>
@@ -126,4 +205,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 *  **Harshit Sinha** - *Initial work* - [Github](https://github.com/harshit-sinha-developer)
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License
