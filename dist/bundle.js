@@ -164,18 +164,20 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var DEFAULT_WIDTH = 100;
-var DEFAULT_HEIGHT = 100;
+var DEFAULT_WIDTH = 300;
+var DEFAULT_HEIGHT = 300;
 
 var ClockApp = exports.ClockApp = function () {
-    function ClockApp(rootElement, options) {
+    function ClockApp(rootElement) {
+        var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
         _classCallCheck(this, ClockApp);
 
         this._rootElement = rootElement;
         this._canvasWidth = options.width || DEFAULT_WIDTH;
         this._canvasHeight = options.height || DEFAULT_HEIGHT;
         this._fillColor = options.color || 'white';
-        this._clockRadius = options.radius || Math.min(this._canvasWidth, this._canvasHeight) / 2;
+        this._clockRadius = options.radius || Math.min(this._canvasWidth, this._canvasHeight) / 2 - 10;
         this._isClockRingFilled = options.isBorderFilled || true;
         this._clockContainerEle = this._getClockContainerEle();
         this._clockCanvasEle = this._getCanvas(this._canvasWidth, this._canvasHeight);

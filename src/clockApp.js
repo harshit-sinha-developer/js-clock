@@ -5,15 +5,15 @@ import { SimpleFace } from "./faces/simpleFace";
 import { faceConfig } from "./faces/config";
 import { ClockHand } from "./ui-elements/clockHand";
 
-const DEFAULT_WIDTH = 100;
-const DEFAULT_HEIGHT = 100;
+const DEFAULT_WIDTH = 300;
+const DEFAULT_HEIGHT = 300;
 export class ClockApp {
-    constructor(rootElement, options) {
+    constructor(rootElement, options = {}) {
         this._rootElement = rootElement;
         this._canvasWidth = options.width || DEFAULT_WIDTH;
         this._canvasHeight = options.height || DEFAULT_HEIGHT;
         this._fillColor = options.color || 'white';
-        this._clockRadius = options.radius || Math.min(this._canvasWidth, this._canvasHeight) / 2;
+        this._clockRadius = options.radius || Math.min(this._canvasWidth, this._canvasHeight) / 2 - 10;
         this._isClockRingFilled = options.isBorderFilled || true;
         this._clockContainerEle = this._getClockContainerEle();
         this._clockCanvasEle = this._getCanvas(this._canvasWidth, this._canvasHeight);

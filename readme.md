@@ -39,13 +39,13 @@ let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config)
       <tr>
          <td>width</td>
          <td>Width of the clock canvas in pixel</td>
-         <td>100</td>
+         <td>300</td>
          <td>Number</td>
       </tr>
       <tr>
          <td>height</td>
          <td>Height of the clock canvas in pixel</td>
-         <td>100</td>
+         <td>300</td>
          <td>Number</td>
       </tr>
       <tr>
@@ -57,7 +57,7 @@ let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config)
       <tr>
          <td>radius</td>
          <td>Clock Radius</td>
-         <td>Math.min(this._canvasWidth, this._canvasHeight) / 2</td>
+         <td>Math.min(this._canvasWidth, this._canvasHeight) / 2 - 10</td>
          <td>Number</td>
       </tr>
       <tr>
@@ -70,7 +70,7 @@ let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config)
          <td>watchFace</td>
          <td>Watch Face selected from a list of predefined watchFaces</td>
          <td>'FACE_1'</td>
-         <td>(Supported - 'FACE_1', 'FACE_2', 'FACE_3')</td>
+         <td>'FACE_1', 'FACE_2', 'FACE_3'</td>
       </tr>
       <tr>
          <td>faceConfig</td>
