@@ -17,7 +17,8 @@ export class SimpleFace {
         this._secondHand = new ClockHand(this._context, 0, radius * 0.9, radius * 0.02, handColor);
         let hingeColor = faceConfig.hingeColor || DEFAULT_PROPERTIES.hingeColor;
         this._centerHinge = new Circle(this._context, 0, 0, radius * 0.1, hingeColor);
-        this._outerCircle = new Circle(this._context, 0, 0, radius, this._fillColor);
+        let fillColor = faceConfig.fillColor || DEFAULT_PROPERTIES.fillColor;
+        this._outerCircle = new Circle(this._context, 0, 0, radius, fillColor);
     }
 
     get hourHand() {

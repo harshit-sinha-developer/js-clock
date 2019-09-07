@@ -1,5 +1,5 @@
 # Analog Clock Widget
-This is a Jquery Analog Clock Plugin.
+An Analog Clock Plugin Widget
 
 ## Getting Started
 1. Download the file - https://github.com/harshit-sinha-developer/jq-clock/blob/master/dist/bundle.js  
@@ -53,12 +53,6 @@ clock.configure(config);
          <td>Height of the clock canvas in pixel</td>
          <td>300</td>
          <td>Number</td>
-      </tr>
-      <tr>
-         <td>color</td>
-         <td>Background color of the clock</td>
-         <td>#FFFFFF</td>
-         <td>String (Hexcode)</td>
       </tr>
       <tr>
          <td>radius</td>
@@ -127,6 +121,12 @@ Examples - [Refer](https://github.com/harshit-sinha-developer/jq-clock/blob/mast
       </tr>
    </thead>
    <tbody>
+      <tr>
+         <td>fillColor</td>
+         <td>Clock Background color</td>
+         <td>#FFFFFF</td>
+         <td>color hexcode</td>
+      </tr>
       <tr>
          <td>isFrameGradient</td>
          <td>Specifies if clock's frame should have a color gradient pattern</td>

@@ -18,11 +18,11 @@ export class ClockHand {
 
     render() {
         this._context.beginPath();
-        this._context.fillStyle = this._fillColor;
         this._context.lineWidth = this._width;
         this._context.lineCap = "round";
         this._context.moveTo(0,0);
         this._context.rotate(this._position);
+        this._context.strokeStyle = this._fillColor;
         this._context.lineTo(0, -this._length);
         this._context.stroke();
         this._context.rotate(-this._position);

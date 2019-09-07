@@ -16,7 +16,7 @@ export class Ring {
             let avgRadius = (this._innerRadius + this._outerRadius) / 2;
             let width = this._outerRadius - this._innerRadius;
             this._context.beginPath();
-            this._context.fillStyle = this._color;
+            this._context.strokeStyle = this._color;
             this._context.arc(this._xCenter, this._xCenter, avgRadius, 0, 2 * Math.PI);
             this._context.lineWidth = width;
             this._context.stroke();

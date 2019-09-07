@@ -238,7 +238,6 @@ var ClockApp = exports.ClockApp = function () {
 
             this._canvasWidth = options.width || this._canvasWidth || _defaultProperties.DEFAULT_PROPERTIES.width;
             this._canvasHeight = options.height || this._canvasHeight || _defaultProperties.DEFAULT_PROPERTIES.height;
-            this._fillColor = options.color || this._fillColor || _defaultProperties.DEFAULT_PROPERTIES.fillColor;
             this._clockRadius = options.radius || this._clockRadius || Math.min(this._canvasWidth, this._canvasHeight) / 2 - 10;
             this._watchFace = options.watchFace || this._watchFace || _defaultProperties.DEFAULT_PROPERTIES.watchFace;
             this._currentFaceConfig = options.faceConfig || _config.faceConfig[options.watchFace] || this._currentFaceConfig || _config.faceConfig[this._watchFace] || {};
@@ -10931,7 +10930,7 @@ var Ring = exports.Ring = function () {
                 var avgRadius = (this._innerRadius + this._outerRadius) / 2;
                 var width = this._outerRadius - this._innerRadius;
                 this._context.beginPath();
-                this._context.fillStyle = this._color;
+                this._context.strokeStyle = this._color;
                 this._context.arc(this._xCenter, this._xCenter, avgRadius, 0, 2 * Math.PI);
                 this._context.lineWidth = width;
                 this._context.stroke();
@@ -10988,7 +10987,8 @@ var SimpleFace = exports.SimpleFace = function () {
         this._secondHand = new _clockHand.ClockHand(this._context, 0, radius * 0.9, radius * 0.02, handColor);
         var hingeColor = faceConfig.hingeColor || _defaultProperties.DEFAULT_PROPERTIES.hingeColor;
         this._centerHinge = new _circle.Circle(this._context, 0, 0, radius * 0.1, hingeColor);
-        this._outerCircle = new _circle.Circle(this._context, 0, 0, radius, this._fillColor);
+        var fillColor = faceConfig.fillColor || _defaultProperties.DEFAULT_PROPERTIES.fillColor;
+        this._outerCircle = new _circle.Circle(this._context, 0, 0, radius, fillColor);
     }
 
     _createClass(SimpleFace, [{
@@ -11091,22 +11091,24 @@ var faceConfig = exports.faceConfig = {
     },
     "FACE_3": {
         "isFrameGradient": true,
-        "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
-        "hingeColor": '#660000',
+        "frameGradientColorList": ['#4d3d00', '#ffcc00', '#ffe680', '#fffae6', '#ffe680', '#ffcc00', '#4d3d00'],
+        "hingeColor": '#cca300',
         "numberColors": {
-            "1": "#0059b3",
-            "2": "#00cc7a",
-            "3": "#4d94ff",
-            "4": "#ff33bb",
-            "5": "#ff9933",
-            "6": "#2d2d86",
-            "7": "#8600b3",
-            "8": "#800000",
-            "9": "#00e6e6",
-            "10": "#ffff00",
-            "11": "#0033cc",
-            "12": "#ff0000"
-        }
+            "1": "#cca300",
+            "2": "#cca300",
+            "3": "#cca300",
+            "4": "#cca300",
+            "5": "#cca300",
+            "6": "#cca300",
+            "7": "#cca300",
+            "8": "#cca300",
+            "9": "#cca300",
+            "10": "#cca300",
+            "11": "#cca300",
+            "12": "#cca300"
+        },
+        "fillColor": '#333333',
+        "handColor": "#cca300"
     },
     "FACE_4": {
         "isFrameGradient": true,
@@ -11161,11 +11163,11 @@ var ClockHand = exports.ClockHand = function () {
         key: "render",
         value: function render() {
             this._context.beginPath();
-            this._context.fillStyle = this._fillColor;
             this._context.lineWidth = this._width;
             this._context.lineCap = "round";
             this._context.moveTo(0, 0);
             this._context.rotate(this._position);
+            this._context.strokeStyle = this._fillColor;
             this._context.lineTo(0, -this._length);
             this._context.stroke();
             this._context.rotate(-this._position);

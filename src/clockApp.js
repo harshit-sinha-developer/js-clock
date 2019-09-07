@@ -62,7 +62,6 @@ export class ClockApp {
     _setConfigurations(options = {}) {
         this._canvasWidth = options.width || this._canvasWidth || DEFAULT_PROPERTIES.width;
         this._canvasHeight = options.height || this._canvasHeight || DEFAULT_PROPERTIES.height;
-        this._fillColor = options.color || this._fillColor || DEFAULT_PROPERTIES.fillColor;
         this._clockRadius = options.radius || this._clockRadius || Math.min(this._canvasWidth, this._canvasHeight) / 2 - 10;
         this._watchFace = options.watchFace || this._watchFace || DEFAULT_PROPERTIES.watchFace;
         this._currentFaceConfig = options.faceConfig || faceConfig[options.watchFace] || this._currentFaceConfig || faceConfig[this._watchFace] || {};
