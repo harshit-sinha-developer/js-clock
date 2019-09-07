@@ -109,6 +109,18 @@ const config = {
 }
 let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), config);
 ```
+##### Supported Predefined faces
+1. FACE_0 <br/>
+<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_0.png"width="40" height="40" />
+2. FACE_1 <br/>
+<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_1.png"width="40" height="40" />
+3. FACE_2 <br/>
+<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_2.png"width="40" height="40" />
+4. FACE_3 <br/>
+<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_3.png"width="40" height="40" />
+5. FACE_4 <br/>
+<img src="https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/FACE_4.png"width="40" height="40" />
+<br/>
 Examples - [Refer](https://github.com/harshit-sinha-developer/jq-clock/blob/master/src/faces/config.js)
 ##### Supported Face Config Properties
 <table>
