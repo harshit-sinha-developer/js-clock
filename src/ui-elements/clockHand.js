@@ -1,9 +1,10 @@
 export class ClockHand {
-    constructor(context, position, length, width) {
+    constructor(context, position, length, width, fillColor) {
         this._context = context;
         this._position = position;
         this._length = length;
         this._width = width;
+        this._fillColor = fillColor;
     }
 
     get position() {
@@ -14,9 +15,10 @@ export class ClockHand {
         this._position = pos;
         this.render();
     }
-    
+
     render() {
         this._context.beginPath();
+        this._context.fillStyle = this._fillColor;
         this._context.lineWidth = this._width;
         this._context.lineCap = "round";
         this._context.moveTo(0,0);

@@ -150,22 +150,15 @@ var _jquery = __webpack_require__(2);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
-var _ring = __webpack_require__(3);
-
-var _circle = __webpack_require__(0);
-
 var _simpleFace = __webpack_require__(4);
 
 var _config = __webpack_require__(5);
 
-var _clockHand = __webpack_require__(6);
+var _defaultProperties = __webpack_require__(7);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var DEFAULT_WIDTH = 300;
-var DEFAULT_HEIGHT = 300;
 
 var ClockApp = exports.ClockApp = function () {
     function ClockApp(rootElement) {
@@ -174,90 +167,99 @@ var ClockApp = exports.ClockApp = function () {
         _classCallCheck(this, ClockApp);
 
         this._rootElement = rootElement;
-        this._canvasWidth = options.width || DEFAULT_WIDTH;
-        this._canvasHeight = options.height || DEFAULT_HEIGHT;
-        this._fillColor = options.color || 'white';
-        this._clockRadius = options.radius || Math.min(this._canvasWidth, this._canvasHeight) / 2 - 10;
-        this._isClockRingFilled = options.isBorderFilled || true;
-        this._clockContainerEle = this._getClockContainerEle();
-        this._clockCanvasEle = this._getCanvas(this._canvasWidth, this._canvasHeight);
-        this._clockCanvas = this._clockCanvasEle[0];
-        this._watchFace = options.watchFace || 'FACE_1';
-        this._currentFaceConfig = options.faceConfig ? options.faceConfig : _config.faceConfig[this._watchFace] || {};
-        this._displayTime = options.displayTime || new Date();
-        this._displayConstantTime = options.displayConstantTime || false;
-        var ctx = this._clockCanvas.getContext('2d');
-        ctx.translate(this._canvasWidth / 2, this._canvasHeight / 2);
-        this._hourHand = new _clockHand.ClockHand(ctx, 0, this._clockRadius * 0.5, this._clockRadius * 0.07);
-        this._minuteHand = new _clockHand.ClockHand(ctx, 0, this._clockRadius * 0.8, this._clockRadius * 0.07);
-        this._secondHand = new _clockHand.ClockHand(ctx, 0, this._clockRadius * 0.9, this._clockRadius * 0.02);
-        this._outerCircle = new _circle.Circle(ctx, 0, 0, this._clockRadius, this._fillColor);
-        var hingeColor = this._currentFaceConfig.hingeColor || "#333";
-        this._centerHinge = new _circle.Circle(ctx, 0, 0, this._clockRadius * 0.1, hingeColor);
-        this._simpleFace = new _simpleFace.SimpleFace(ctx, 0, 0, this._clockRadius, this._currentFaceConfig);
-
-        (0, _jquery2.default)(this._rootElement).append(this._clockContainerEle).append(this._clockCanvasEle);
-        this.initTimer();
+        this._setConfigurations(options);
+        this._initClockStructure();
+        this._initClockUi();
+        this.render();
+        this._initTimer();
     }
 
     _createClass(ClockApp, [{
-        key: "initTimer",
-        value: function initTimer() {
-            if (!this._displayConstantTime) {
-                this.intervalId = setInterval(this.render.bind(this), 1000);
-            }
+        key: "configure",
+        value: function configure(options) {
+            this._resetCanvasDimensionsSafe(options);
+            this._setConfigurations(options);
+            this._initClockUi();
+            this.render();
         }
     }, {
         key: "render",
         value: function render() {
-            this._outerCircle.render();
-            this._simpleFace.apply();
-            this._centerHinge.render();
-            this.drawNumbers();
+            this._simpleFace.render();
+            this._renderTime();
+        }
+    }, {
+        key: "_renderTime",
+        value: function _renderTime() {
             if (!this._displayConstantTime) {
                 this._displayTime = new Date();
             }
-            this.renderTime(this._displayTime);
-        }
-    }, {
-        key: "renderTime",
-        value: function renderTime(time) {
-            var _getTimeHrMmSs2 = this._getTimeHrMmSs(time),
+
+            var _getTimeHrMmSs2 = this._getTimeHrMmSs(this._displayTime),
                 hour = _getTimeHrMmSs2.hour,
                 minute = _getTimeHrMmSs2.minute,
                 second = _getTimeHrMmSs2.second;
 
-            this._hourHand.position = hour;
-            this._minuteHand.position = minute;
-            this._secondHand.position = second;
+            this._simpleFace.hourHand.position = hour;
+            this._simpleFace.minuteHand.position = minute;
+            this._simpleFace.secondHand.position = second;
         }
     }, {
-        key: "drawNumbers",
-        value: function drawNumbers() {
-            var ang = void 0;
-            var num = void 0;
+        key: "_initClockStructure",
+        value: function _initClockStructure() {
+            this._clockContainerEle = this._getClockContainerEle();
+            this._clockCanvasEle = this._getCanvas(this._canvasWidth, this._canvasHeight);
+            this._clockCanvas = this._clockCanvasEle[0];
+            (0, _jquery2.default)(this._rootElement).append(this._clockContainerEle).append(this._clockCanvasEle);
+        }
+    }, {
+        key: "_initClockUi",
+        value: function _initClockUi() {
             var ctx = this._clockCanvas.getContext('2d');
-            ctx.font = this._clockRadius * 0.15 + "px arial";
-            ctx.textBaseline = "middle";
-            ctx.textAlign = "center";
-            var faceConfig = this._currentFaceConfig || {};
-            var numberColors = faceConfig.numberColors || {};
-            for (num = 1; num < 13; num++) {
-                ang = num * Math.PI / 6;
-                ctx.rotate(ang);
-                ctx.translate(0, -this._clockRadius * 0.85);
-                ctx.rotate(-ang);
-                if (numberColors[num]) {
-                    ctx.fillStyle = numberColors[num];
-                } else {
-                    ctx.fillStyle = faceConfig.hingeColor || '#333';
+            ctx.resetTransform();
+            ctx.clearRect(0, 0, this._canvasWidth, this._canvasHeight);
+            ctx.translate(this._canvasWidth / 2, this._canvasHeight / 2);
+            this._simpleFace = new _simpleFace.SimpleFace(ctx, 0, 0, this._clockRadius, this._currentFaceConfig);
+        }
+    }, {
+        key: "_initTimer",
+        value: function _initTimer() {
+            if (!this._displayConstantTime) {
+                if (this.intervalId) {
+                    clearInterval(this.intervalId);
                 }
-                ctx.fillText(num.toString(), 0, 0);
-                ctx.rotate(ang);
-                ctx.translate(0, this._clockRadius * 0.85);
-                ctx.rotate(-ang);
+                this.intervalId = setInterval(this.render.bind(this), 1000);
             }
-            ctx.fillStyle = faceConfig.hingeColor || '#333';
+        }
+    }, {
+        key: "_setConfigurations",
+        value: function _setConfigurations() {
+            var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+            this._canvasWidth = options.width || this._canvasWidth || _defaultProperties.DEFAULT_PROPERTIES.width;
+            this._canvasHeight = options.height || this._canvasHeight || _defaultProperties.DEFAULT_PROPERTIES.height;
+            this._fillColor = options.color || this._fillColor || _defaultProperties.DEFAULT_PROPERTIES.fillColor;
+            this._clockRadius = options.radius || this._clockRadius || Math.min(this._canvasWidth, this._canvasHeight) / 2 - 10;
+            this._watchFace = options.watchFace || this._watchFace || _defaultProperties.DEFAULT_PROPERTIES.watchFace;
+            this._currentFaceConfig = options.faceConfig || _config.faceConfig[options.watchFace] || this._currentFaceConfig || _config.faceConfig[this._watchFace] || {};
+            this._displayTime = options.displayTime || this._displayTime || _defaultProperties.DEFAULT_PROPERTIES.displayTime;
+            this._displayConstantTime = options.displayConstantTime || this._displayConstantTime || _defaultProperties.DEFAULT_PROPERTIES.displayConstantTime;
+        }
+    }, {
+        key: "_resetCanvasDimensionsSafe",
+        value: function _resetCanvasDimensionsSafe(_ref) {
+            var width = _ref.width,
+                height = _ref.height;
+
+            if (!width && !height) {
+                return;
+            }
+            if (width == this._canvasWidth && height == this._canvasHeight) {
+                return;
+            }
+            var ctx = this._clockCanvas.getContext('2d');
+            ctx.canvas.width = width;
+            ctx.canvas.height = height;
         }
     }, {
         key: "_getCanvas",
@@ -10910,7 +10912,7 @@ var _circle = __webpack_require__(0);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var Ring = exports.Ring = function () {
-    function Ring(context, xCenter, yCenter, innerRadius, outerRadius, isRingFilled) {
+    function Ring(context, xCenter, yCenter, innerRadius, outerRadius, isRingFilled, color) {
         _classCallCheck(this, Ring);
 
         this._context = context;
@@ -10919,6 +10921,7 @@ var Ring = exports.Ring = function () {
         this._innerRadius = innerRadius;
         this._outerRadius = outerRadius;
         this._isRingFilled = isRingFilled || false;
+        this._color = color;
     }
 
     _createClass(Ring, [{
@@ -10928,12 +10931,13 @@ var Ring = exports.Ring = function () {
                 var avgRadius = (this._innerRadius + this._outerRadius) / 2;
                 var width = this._outerRadius - this._innerRadius;
                 this._context.beginPath();
+                this._context.fillStyle = this._color;
                 this._context.arc(this._xCenter, this._xCenter, avgRadius, 0, 2 * Math.PI);
                 this._context.lineWidth = width;
                 this._context.stroke();
             } else {
-                var innerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._innerRadius);
-                var outerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._outerRadius);
+                var innerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._innerRadius, this._color);
+                var outerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._outerRadius, this._color);
                 innerCircle.render();
                 outerCircle.render();
             }
@@ -10953,8 +10957,17 @@ var Ring = exports.Ring = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+exports.SimpleFace = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _ring = __webpack_require__(3);
+
+var _clockHand = __webpack_require__(6);
+
+var _circle = __webpack_require__(0);
+
+var _defaultProperties = __webpack_require__(7);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -10966,21 +10979,82 @@ var SimpleFace = exports.SimpleFace = function () {
         this._xCenter = xCenter;
         this._yCenter = yCenter;
         this._radius = radius;
-        this._colorGradientStopPoints = faceConfig.colorList;
+        this._faceConfig = faceConfig;
+        this._isBorderFilled = faceConfig.isBorderFilled || _defaultProperties.DEFAULT_PROPERTIES.isBorderFilled;
+
+        var handColor = faceConfig.handColor || _defaultProperties.DEFAULT_PROPERTIES.handColor;
+        this._hourHand = new _clockHand.ClockHand(this._context, 0, radius * 0.5, radius * 0.07, handColor);
+        this._minuteHand = new _clockHand.ClockHand(this._context, 0, radius * 0.8, radius * 0.07, handColor);
+        this._secondHand = new _clockHand.ClockHand(this._context, 0, radius * 0.9, radius * 0.02, handColor);
+        var hingeColor = faceConfig.hingeColor || _defaultProperties.DEFAULT_PROPERTIES.hingeColor;
+        this._centerHinge = new _circle.Circle(this._context, 0, 0, radius * 0.1, hingeColor);
+        this._outerCircle = new _circle.Circle(this._context, 0, 0, radius, this._fillColor);
     }
 
     _createClass(SimpleFace, [{
-        key: "apply",
-        value: function apply() {
-            var grad = this._context.createRadialGradient(this._xCenter, this._yCenter, this._radius * 0.95, this._xCenter, this._yCenter, this._radius * 1.05);
-
-            for (var i = 0; i < this._colorGradientStopPoints.length; i++) {
-                var ratio = i / (this._colorGradientStopPoints.length - 1);
-                grad.addColorStop(ratio, this._colorGradientStopPoints[i]);
+        key: "render",
+        value: function render() {
+            this._outerCircle.render();
+            if (this._isBorderFilled && this._faceConfig.isGradient) {
+                var colorGradientStopPoints = this._faceConfig.frameGradientColorList || _defaultProperties.DEFAULT_PROPERTIES.frameGradientColorList;
+                var grad = this._context.createRadialGradient(this._xCenter, this._yCenter, this._radius * 0.95, this._xCenter, this._yCenter, this._radius * 1.05);
+                for (var i = 0; i < colorGradientStopPoints.length; i++) {
+                    var ratio = i / (colorGradientStopPoints.length - 1);
+                    grad.addColorStop(ratio, colorGradientStopPoints[i]);
+                }
+                this._context.strokeStyle = grad;
+                this._context.lineWidth = this._radius * 0.1;
+                this._context.stroke();
+            } else {
+                var color = this._faceConfig.frameColor || _defaultProperties.DEFAULT_PROPERTIES.hingeColor;
+                var ring = new _ring.Ring(this._context, this._xCenter, this._yCenter, this._radius * 1.05, this._radius * 0.95, this._isBorderFilled, color);
+                ring.render();
             }
-            this._context.strokeStyle = grad;
-            this._context.lineWidth = this._radius * 0.1;
-            this._context.stroke();
+            this._centerHinge.render();
+            this.drawNumbers();
+        }
+    }, {
+        key: "drawNumbers",
+        value: function drawNumbers() {
+            var ang = void 0;
+            var num = void 0;
+            var ctx = this._context;
+            ctx.font = this._radius * 0.15 + "px arial";
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            var faceConfig = this._faceConfig || {};
+            var numberColors = faceConfig.numberColors || {};
+            for (num = 1; num < 13; num++) {
+                ang = num * Math.PI / 6;
+                ctx.rotate(ang);
+                ctx.translate(0, -this._radius * 0.85);
+                ctx.rotate(-ang);
+                if (numberColors[num]) {
+                    ctx.fillStyle = numberColors[num];
+                } else {
+                    ctx.fillStyle = faceConfig.hingeColor || '#333';
+                }
+                ctx.fillText(num.toString(), 0, 0);
+                ctx.rotate(ang);
+                ctx.translate(0, this._radius * 0.85);
+                ctx.rotate(-ang);
+            }
+            ctx.fillStyle = faceConfig.hingeColor || '#333';
+        }
+    }, {
+        key: "hourHand",
+        get: function get() {
+            return this._hourHand;
+        }
+    }, {
+        key: "minuteHand",
+        get: function get() {
+            return this._minuteHand;
+        }
+    }, {
+        key: "secondHand",
+        get: function get() {
+            return this._secondHand;
         }
     }]);
 
@@ -10998,16 +11072,26 @@ Object.defineProperty(exports, "__esModule", {
     value: true
 });
 var faceConfig = exports.faceConfig = {
+    "FACE_0": {
+        "isBorderFilled": true,
+        "frameColor": "#660000",
+        "hingeColor": '#333',
+        "handColor": "#333"
+    },
     "FACE_1": {
-        "colorList": ['#333', '#FFFFFF', '#333'],
-        "hingeColor": '#333'
+        "isGradient": true,
+        "frameGradientColorList": ['#333', '#FFFFFF', '#333'],
+        "hingeColor": '#333',
+        "handColor": "#333"
     },
     "FACE_2": {
-        "colorList": ['#660000', '#ff0000', '#ffcccc'],
+        "isGradient": true,
+        "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
         "hingeColor": '#660000'
     },
     "FACE_3": {
-        "colorList": ['#660000', '#ff0000', '#ffcccc'],
+        "isGradient": true,
+        "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
         "hingeColor": '#660000',
         "numberColors": {
             "1": "#0059b3",
@@ -11023,6 +11107,27 @@ var faceConfig = exports.faceConfig = {
             "11": "#0033cc",
             "12": "#ff0000"
         }
+    },
+    "FACE_4": {
+        "isGradient": true,
+        "frameGradientColorList": ["#ff0000", "#00ff00", "#0000ff"],
+        "hingeColor": "#660000",
+        "numberColors": {
+            "1": "#0059b3",
+            "2": "#00cc7a",
+            "3": "#4d94ff",
+            "4": "#ff33bb",
+            "5": "#ff9933",
+            "6": "#2d2d86",
+            "7": "#8600b3",
+            "8": "#800000",
+            "9": "#00e6e6",
+            "10": "#ffff00",
+            "11": "#0033cc",
+            "12": "#ff0000"
+        },
+        "handColor": "#660000",
+        "frameColor": "#660000"
     }
 };
 
@@ -11042,19 +11147,21 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ClockHand = exports.ClockHand = function () {
-    function ClockHand(context, position, length, width) {
+    function ClockHand(context, position, length, width, fillColor) {
         _classCallCheck(this, ClockHand);
 
         this._context = context;
         this._position = position;
         this._length = length;
         this._width = width;
+        this._fillColor = fillColor;
     }
 
     _createClass(ClockHand, [{
         key: "render",
         value: function render() {
             this._context.beginPath();
+            this._context.fillStyle = this._fillColor;
             this._context.lineWidth = this._width;
             this._context.lineCap = "round";
             this._context.moveTo(0, 0);
@@ -11076,6 +11183,29 @@ var ClockHand = exports.ClockHand = function () {
 
     return ClockHand;
 }();
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+var DEFAULT_PROPERTIES = exports.DEFAULT_PROPERTIES = {
+    width: 300,
+    height: 300,
+    fillColor: '#FFFFFF',
+    isBorderFilled: true,
+    watchFace: 'FACE_1',
+    displayTime: new Date(),
+    displayConstantTime: false,
+    hingeColor: '#333',
+    handColor: '#333',
+    frameGradientColorList: ['#333', '#FFFFFF', '#333']
+};
 
 /***/ })
 /******/ ]);
