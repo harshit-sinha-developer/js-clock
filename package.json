@@ -6,6 +6,7 @@
   "scripts": {
     "start": "./node_modules/.bin/webpack --watch",
     "start:server": "./node_modules/.bin/http-server -p 3005",
+    "build": "NODE_ENV=production ./node_modules/.bin/webpack",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

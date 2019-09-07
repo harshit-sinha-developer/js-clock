@@ -1,11 +1,12 @@
 # Analog Clock Widget
 An Analog Clock Plugin Widget<br/>
 ![Alt Text](https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/jq-clock.gif)
+
 ## Getting Started
-1. Download the file - https://github.com/harshit-sinha-developer/jq-clock/blob/master/dist/bundle.js  
+1. Download the file - https://github.com/harshit-sinha-developer/jq-clock/blob/master/dist/bundle.min.js  
 2. Include it in your scripts
 ```
-<script src="dist/bundle.js"></script>
+<script src="dist/bundle.min.js"></script>
 ```
 3. Make a div in html
 ```
