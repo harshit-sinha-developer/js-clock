@@ -14,7 +14,13 @@ An Analog Clock Plugin Widget<br/>
 4. Pass the div to ClockWidget initialisation
 ```
 <script>
-let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), { width: 500, height: 500, radius: 200, watchFace: 'FACE_3' });
+const config = { 
+    width: 500, 
+    height: 500, 
+    radius: 200, 
+    watchFace: 'FACE_3' 
+}
+let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), );
 </script>
 ```
 
