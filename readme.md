@@ -8,6 +8,15 @@ An Analog Clock Plugin Widget<br/>
 ```
 <script src="dist/bundle.min.js"></script>
 ```
+
+Using ES2015 modules along with webpack
+```
+npm install js-easy-clock --save
+```
+Import
+```
+import * as ClockWidget from "js-easy-clock";
+```
 3. Make a div in html
 ```
 <div id="myClock"></div>
