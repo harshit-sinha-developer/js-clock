@@ -18,7 +18,8 @@ export class ClockApp {
         this._clockContainerEle = this._getClockContainerEle();
         this._clockCanvasEle = this._getCanvas(this._canvasWidth, this._canvasHeight);
         this._clockCanvas = this._clockCanvasEle[0];
-        this._watchFace = faceConfig[options.watchFace] || 'FACE_1';
+        this._watchFace = options.watchFace || 'FACE_1';
+        this._currentFaceConfig = options.faceConfig ? options.faceConfig : faceConfig[this._watchFace] || {};
         this._displayTime = options.displayTime || new Date();
         this._displayConstantTime = options.displayConstantTime || false;
         let ctx = this._clockCanvas.getContext('2d');
@@ -27,8 +28,9 @@ export class ClockApp {
         this._minuteHand = new ClockHand(ctx, 0, this._clockRadius * 0.8, this._clockRadius * 0.07);
         this._secondHand = new ClockHand(ctx, 0, this._clockRadius * 0.9, this._clockRadius * 0.02);
         this._outerCircle = new Circle(ctx, 0, 0, this._clockRadius, this._fillColor);
-        this._centerHinge = new Circle(ctx, 0, 0, this._clockRadius * 0.1, '#333');
-        this._simpleFace = new SimpleFace(ctx, 0, 0, this._clockRadius, faceConfig[this._watchFace]);
+        let hingeColor = this._currentFaceConfig.hingeColor || "#333";
+        this._centerHinge = new Circle(ctx, 0, 0, this._clockRadius * 0.1, hingeColor);
+        this._simpleFace = new SimpleFace(ctx, 0, 0, this._clockRadius, this._currentFaceConfig);
         
         $(this._rootElement).append(this._clockContainerEle).append(this._clockCanvasEle);
         this.initTimer();
@@ -65,16 +67,24 @@ export class ClockApp {
         ctx.font = this._clockRadius * 0.15 + "px arial";
         ctx.textBaseline = "middle";
         ctx.textAlign = "center";
+        let faceConfig = this._currentFaceConfig || {};
+        let numberColors = faceConfig.numberColors || {};
         for(num = 1; num < 13; num++){
             ang = num * Math.PI / 6;
             ctx.rotate(ang);
             ctx.translate(0, - this._clockRadius * 0.85);
             ctx.rotate(-ang);
+            if(numberColors[num]) {
+                ctx.fillStyle = numberColors[num];
+            } else {
+                ctx.fillStyle = faceConfig.hingeColor || '#333';
+            }
             ctx.fillText(num.toString(), 0, 0);
             ctx.rotate(ang);
             ctx.translate(0, this._clockRadius * 0.85);
             ctx.rotate(-ang);
         }
+        ctx.fillStyle = faceConfig.hingeColor || '#333';
     }
 
     _getCanvas(canvasWidth, canvasHeight) {

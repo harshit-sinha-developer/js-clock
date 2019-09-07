@@ -180,7 +180,8 @@ var ClockApp = exports.ClockApp = function () {
         this._clockContainerEle = this._getClockContainerEle();
         this._clockCanvasEle = this._getCanvas(this._canvasWidth, this._canvasHeight);
         this._clockCanvas = this._clockCanvasEle[0];
-        this._watchFace = _config.faceConfig[options.watchFace] || 'FACE_1';
+        this._watchFace = options.watchFace || 'FACE_1';
+        this._currentFaceConfig = options.faceConfig ? options.faceConfig : _config.faceConfig[this._watchFace] || {};
         this._displayTime = options.displayTime || new Date();
         this._displayConstantTime = options.displayConstantTime || false;
         var ctx = this._clockCanvas.getContext('2d');
@@ -189,8 +190,9 @@ var ClockApp = exports.ClockApp = function () {
         this._minuteHand = new _clockHand.ClockHand(ctx, 0, this._clockRadius * 0.8, this._clockRadius * 0.07);
         this._secondHand = new _clockHand.ClockHand(ctx, 0, this._clockRadius * 0.9, this._clockRadius * 0.02);
         this._outerCircle = new _circle.Circle(ctx, 0, 0, this._clockRadius, this._fillColor);
-        this._centerHinge = new _circle.Circle(ctx, 0, 0, this._clockRadius * 0.1, '#333');
-        this._simpleFace = new _simpleFace.SimpleFace(ctx, 0, 0, this._clockRadius, _config.faceConfig[this._watchFace]);
+        var hingeColor = this._currentFaceConfig.hingeColor || "#333";
+        this._centerHinge = new _circle.Circle(ctx, 0, 0, this._clockRadius * 0.1, hingeColor);
+        this._simpleFace = new _simpleFace.SimpleFace(ctx, 0, 0, this._clockRadius, this._currentFaceConfig);
 
         (0, _jquery2.default)(this._rootElement).append(this._clockContainerEle).append(this._clockCanvasEle);
         this.initTimer();
@@ -236,16 +238,24 @@ var ClockApp = exports.ClockApp = function () {
             ctx.font = this._clockRadius * 0.15 + "px arial";
             ctx.textBaseline = "middle";
             ctx.textAlign = "center";
+            var faceConfig = this._currentFaceConfig || {};
+            var numberColors = faceConfig.numberColors || {};
             for (num = 1; num < 13; num++) {
                 ang = num * Math.PI / 6;
                 ctx.rotate(ang);
                 ctx.translate(0, -this._clockRadius * 0.85);
                 ctx.rotate(-ang);
+                if (numberColors[num]) {
+                    ctx.fillStyle = numberColors[num];
+                } else {
+                    ctx.fillStyle = faceConfig.hingeColor || '#333';
+                }
                 ctx.fillText(num.toString(), 0, 0);
                 ctx.rotate(ang);
                 ctx.translate(0, this._clockRadius * 0.85);
                 ctx.rotate(-ang);
             }
+            ctx.fillStyle = faceConfig.hingeColor || '#333';
         }
     }, {
         key: "_getCanvas",
@@ -10987,7 +10997,30 @@ Object.defineProperty(exports, "__esModule", {
 });
 var faceConfig = exports.faceConfig = {
     "FACE_1": {
-        "colorList": ['#333', '#FFFFFF', '#333']
+        "colorList": ['#333', '#FFFFFF', '#333'],
+        "hingeColor": '#333'
+    },
+    "FACE_2": {
+        "colorList": ['#660000', '#ff0000', '#ffcccc'],
+        "hingeColor": '#660000'
+    },
+    "FACE_3": {
+        "colorList": ['#660000', '#ff0000', '#ffcccc'],
+        "hingeColor": '#660000',
+        "numberColors": {
+            "1": "#0059b3",
+            "2": "#00cc7a",
+            "3": "#4d94ff",
+            "4": "#ff33bb",
+            "5": "#ff9933",
+            "6": "#2d2d86",
+            "7": "#8600b3",
+            "8": "#800000",
+            "9": "#00e6e6",
+            "10": "#ffff00",
+            "11": "#0033cc",
+            "12": "#ff0000"
+        }
     }
 };
 
