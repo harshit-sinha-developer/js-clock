@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/harshitsinha1102/js-clock.git"
+    "url": "git+https://github.com/harshit-sinha-developer/js-clock"
   },
   "author": "Harshit Sinha",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/harshitsinha1102/js-clock/issues"
+    "url": "https://github.com/harshit-sinha-developer/js-clock/issues"
   },
-  "homepage": "https://github.com/harshitsinha1102/js-clock#readme",
+  "homepage": "https://github.com/harshit-sinha-developer/js-clock#readme.md",
   "devDependencies": {
     "babel-core": "6.26.3",
     "babel-loader": "8.0.6",
