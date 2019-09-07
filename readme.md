@@ -1,5 +1,5 @@
 # Analog Clock Widget
-An Analog Clock Plugin Widget
+An Analog Clock Plugin Widget<br/>
 ![Alt Text](https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/jq-clock.gif)
 ## Getting Started
 1. Download the file - https://github.com/harshit-sinha-developer/jq-clock/blob/master/dist/bundle.js  
