@@ -1,5 +1,5 @@
 {
-  "name": "jq-clock",
+  "name": "js-clock",
   "version": "0.0.1",
   "description": "A jquery plugin for an analog clock",
   "main": "./dist/bundle.min.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/harshitsinha1102/jq-clock.git"
+    "url": "git+https://github.com/harshitsinha1102/js-clock.git"
   },
   "author": "Harshit Sinha",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/harshitsinha1102/jq-clock/issues"
+    "url": "https://github.com/harshitsinha1102/js-clock/issues"
   },
-  "homepage": "https://github.com/harshitsinha1102/jq-clock#readme",
+  "homepage": "https://github.com/harshitsinha1102/js-clock#readme",
   "devDependencies": {
     "babel-core": "6.26.3",
     "babel-loader": "8.0.6",
