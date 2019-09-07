@@ -123,7 +123,7 @@ Examples - [Refer](https://github.com/harshit-sinha-developer/jq-clock/blob/mast
          <th>Property Name</th>
          <th>Description</th>
          <th>Default</th>
-         <th>Type / Supported Values</th>
+         <th>Supported Values</th>
       </tr>
    </thead>
    <tbody>
@@ -166,7 +166,7 @@ Examples - [Refer](https://github.com/harshit-sinha-developer/jq-clock/blob/mast
       <tr>
          <td>numberColors</td>
          <td>a map where key is the number displayed on the clock and value is color of the that number</td>
-         <td>empty - all colors set to '#333'</td>
+         <td>empty - all colors set to #333</td>
          <td>map</td>
       </tr>
    </tbody>
