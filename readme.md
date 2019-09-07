@@ -70,13 +70,13 @@ clock.configure(config);
          <td>watchFace</td>
          <td>Watch Face selected from a list of predefined watchFaces</td>
          <td>FACE_1</td>
-         <td>[Refer](https://github.com/harshit-sinha-developer/jq-clock#watch-faces)</td>
+         <td>Mentioned below</td>
       </tr>
       <tr>
          <td>faceConfig</td>
          <td>Custom Watch faceconfig</td>
          <td>Empty</td>
-         <td>[Refer](https://github.com/harshit-sinha-developer/jq-clock#watch-faces)</td>
+         <td>Mentioned below</td>
       </tr>
       <tr>
          <td>displayTime</td>
