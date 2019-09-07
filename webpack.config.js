@@ -9,7 +9,7 @@ module.exports = {
         // Webpack prefers an absolute path:
         path: path.resolve(__dirname, './dist'),
         filename: debug ? 'bundle.js' : 'bundle.min.js',
-        libraryTarget: "var",
+        libraryTarget: "umd",
         // name of the global var: "Foo"
         library: "ClockWidget"
     },

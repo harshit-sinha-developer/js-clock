@@ -1,5 +1,14 @@
-var ClockWidget =
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define([], factory);
+	else if(typeof exports === 'object')
+		exports["ClockWidget"] = factory();
+	else
+		root["ClockWidget"] = factory();
+})(typeof self !== 'undefined' ? self : this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -61,7 +70,7 @@ var ClockWidget =
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -142,19 +151,42 @@ var Circle = exports.Circle = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+var DEFAULT_PROPERTIES = exports.DEFAULT_PROPERTIES = {
+    width: 300,
+    height: 300,
+    fillColor: '#FFFFFF',
+    isBorderFilled: true,
+    watchFace: 'FACE_1',
+    displayTime: new Date(),
+    displayConstantTime: false,
+    hingeColor: '#333',
+    handColor: '#333',
+    frameGradientColorList: ['#333', '#FFFFFF', '#333']
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 exports.ClockApp = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _jquery = __webpack_require__(2);
+var _jquery = __webpack_require__(3);
 
 var _jquery2 = _interopRequireDefault(_jquery);
 
 var _simpleFace = __webpack_require__(4);
 
-var _config = __webpack_require__(5);
+var _config = __webpack_require__(7);
 
-var _defaultProperties = __webpack_require__(7);
+var _defaultProperties = __webpack_require__(1);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -288,7 +320,7 @@ var ClockApp = exports.ClockApp = function () {
 }();
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -10893,60 +10925,6 @@ return jQuery;
 
 
 /***/ }),
-/* 3 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-    value: true
-});
-exports.Ring = undefined;
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _circle = __webpack_require__(0);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Ring = exports.Ring = function () {
-    function Ring(context, xCenter, yCenter, innerRadius, outerRadius, isRingFilled, color) {
-        _classCallCheck(this, Ring);
-
-        this._context = context;
-        this._xCenter = xCenter;
-        this._yCenter = yCenter;
-        this._innerRadius = innerRadius;
-        this._outerRadius = outerRadius;
-        this._isRingFilled = isRingFilled || false;
-        this._color = color;
-    }
-
-    _createClass(Ring, [{
-        key: "render",
-        value: function render() {
-            if (this._isRingFilled) {
-                var avgRadius = (this._innerRadius + this._outerRadius) / 2;
-                var width = this._outerRadius - this._innerRadius;
-                this._context.beginPath();
-                this._context.strokeStyle = this._color;
-                this._context.arc(this._xCenter, this._xCenter, avgRadius, 0, 2 * Math.PI);
-                this._context.lineWidth = width;
-                this._context.stroke();
-            } else {
-                var innerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._innerRadius, this._color);
-                var outerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._outerRadius, this._color);
-                innerCircle.render();
-                outerCircle.render();
-            }
-        }
-    }]);
-
-    return Ring;
-}();
-
-/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -10960,13 +10938,13 @@ exports.SimpleFace = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _ring = __webpack_require__(3);
+var _ring = __webpack_require__(5);
 
 var _clockHand = __webpack_require__(6);
 
 var _circle = __webpack_require__(0);
 
-var _defaultProperties = __webpack_require__(7);
+var _defaultProperties = __webpack_require__(1);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -11071,67 +11049,49 @@ var SimpleFace = exports.SimpleFace = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var faceConfig = exports.faceConfig = {
-    "FACE_0": {
-        "isBorderFilled": true,
-        "frameColor": "#660000",
-        "hingeColor": '#333',
-        "handColor": "#333"
-    },
-    "FACE_1": {
-        "isFrameGradient": true,
-        "frameGradientColorList": ['#333', '#FFFFFF', '#333'],
-        "hingeColor": '#333',
-        "handColor": "#333"
-    },
-    "FACE_2": {
-        "isFrameGradient": true,
-        "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
-        "hingeColor": '#660000'
-    },
-    "FACE_3": {
-        "isFrameGradient": true,
-        "frameGradientColorList": ['#4d3d00', '#ffcc00', '#ffe680', '#fffae6', '#ffe680', '#ffcc00', '#4d3d00'],
-        "hingeColor": '#cca300',
-        "numberColors": {
-            "1": "#cca300",
-            "2": "#cca300",
-            "3": "#cca300",
-            "4": "#cca300",
-            "5": "#cca300",
-            "6": "#cca300",
-            "7": "#cca300",
-            "8": "#cca300",
-            "9": "#cca300",
-            "10": "#cca300",
-            "11": "#cca300",
-            "12": "#cca300"
-        },
-        "fillColor": '#333333',
-        "handColor": "#cca300"
-    },
-    "FACE_4": {
-        "isFrameGradient": true,
-        "frameGradientColorList": ["#ff0000", "#00ff00", "#0000ff"],
-        "hingeColor": "#660000",
-        "numberColors": {
-            "1": "#0059b3",
-            "2": "#00cc7a",
-            "3": "#4d94ff",
-            "4": "#ff33bb",
-            "5": "#ff9933",
-            "6": "#2d2d86",
-            "7": "#8600b3",
-            "8": "#800000",
-            "9": "#00e6e6",
-            "10": "#ffff00",
-            "11": "#0033cc",
-            "12": "#ff0000"
-        },
-        "handColor": "#660000",
-        "frameColor": "#660000"
+exports.Ring = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _circle = __webpack_require__(0);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Ring = exports.Ring = function () {
+    function Ring(context, xCenter, yCenter, innerRadius, outerRadius, isRingFilled, color) {
+        _classCallCheck(this, Ring);
+
+        this._context = context;
+        this._xCenter = xCenter;
+        this._yCenter = yCenter;
+        this._innerRadius = innerRadius;
+        this._outerRadius = outerRadius;
+        this._isRingFilled = isRingFilled || false;
+        this._color = color;
     }
-};
+
+    _createClass(Ring, [{
+        key: "render",
+        value: function render() {
+            if (this._isRingFilled) {
+                var avgRadius = (this._innerRadius + this._outerRadius) / 2;
+                var width = this._outerRadius - this._innerRadius;
+                this._context.beginPath();
+                this._context.strokeStyle = this._color;
+                this._context.arc(this._xCenter, this._xCenter, avgRadius, 0, 2 * Math.PI);
+                this._context.lineWidth = width;
+                this._context.stroke();
+            } else {
+                var innerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._innerRadius, this._color);
+                var outerCircle = new _circle.Circle(this._context, this._xCenter, this._yCenter, this._outerRadius, this._color);
+                innerCircle.render();
+                outerCircle.render();
+            }
+        }
+    }]);
+
+    return Ring;
+}();
 
 /***/ }),
 /* 6 */
@@ -11196,19 +11156,69 @@ var ClockHand = exports.ClockHand = function () {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
-var DEFAULT_PROPERTIES = exports.DEFAULT_PROPERTIES = {
-    width: 300,
-    height: 300,
-    fillColor: '#FFFFFF',
-    isBorderFilled: true,
-    watchFace: 'FACE_1',
-    displayTime: new Date(),
-    displayConstantTime: false,
-    hingeColor: '#333',
-    handColor: '#333',
-    frameGradientColorList: ['#333', '#FFFFFF', '#333']
+var faceConfig = exports.faceConfig = {
+    "FACE_0": {
+        "isBorderFilled": true,
+        "frameColor": "#660000",
+        "hingeColor": '#333',
+        "handColor": "#333"
+    },
+    "FACE_1": {
+        "isFrameGradient": true,
+        "frameGradientColorList": ['#333', '#FFFFFF', '#333'],
+        "hingeColor": '#333',
+        "handColor": "#333"
+    },
+    "FACE_2": {
+        "isFrameGradient": true,
+        "frameGradientColorList": ['#660000', '#ff0000', '#ffcccc'],
+        "hingeColor": '#660000'
+    },
+    "FACE_3": {
+        "isFrameGradient": true,
+        "frameGradientColorList": ['#4d3d00', '#ffcc00', '#ffe680', '#fffae6', '#ffe680', '#ffcc00', '#4d3d00'],
+        "hingeColor": '#cca300',
+        "numberColors": {
+            "1": "#cca300",
+            "2": "#cca300",
+            "3": "#cca300",
+            "4": "#cca300",
+            "5": "#cca300",
+            "6": "#cca300",
+            "7": "#cca300",
+            "8": "#cca300",
+            "9": "#cca300",
+            "10": "#cca300",
+            "11": "#cca300",
+            "12": "#cca300"
+        },
+        "fillColor": '#333333',
+        "handColor": "#cca300"
+    },
+    "FACE_4": {
+        "isFrameGradient": true,
+        "frameGradientColorList": ["#ff0000", "#00ff00", "#0000ff"],
+        "hingeColor": "#660000",
+        "numberColors": {
+            "1": "#0059b3",
+            "2": "#00cc7a",
+            "3": "#4d94ff",
+            "4": "#ff33bb",
+            "5": "#ff9933",
+            "6": "#2d2d86",
+            "7": "#8600b3",
+            "8": "#800000",
+            "9": "#00e6e6",
+            "10": "#ffff00",
+            "11": "#0033cc",
+            "12": "#ff0000"
+        },
+        "handColor": "#660000",
+        "frameColor": "#660000"
+    }
 };
 
 /***/ })
 /******/ ]);
+});
 //# sourceMappingURL=bundle.js.map
