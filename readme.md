@@ -1,20 +1,20 @@
 # Analog Clock Widget
 An Analog Clock Plugin Widget
-
+![Alt Text](https://github.com/harshit-sinha-developer/jq-clock/blob/master/resources/jq-clock.gif)
 ## Getting Started
 1. Download the file - https://github.com/harshit-sinha-developer/jq-clock/blob/master/dist/bundle.js  
 2. Include it in your scripts
 ```
-<script  src="dist/bundle.js"></script>
+<script src="dist/bundle.js"></script>
 ```
 3. Make a div in html
 ```
-<div  id="myClock"></div>
+<div id="myClock"></div>
 ```
 4. Pass the div to ClockWidget initialisation
 ```
 <script>
-let  clock = new  ClockWidget.ClockApp(document.getElementById('myClock'), { width:  500, height:  500, radius:  200, watchFace:  'FACE_3' });
+let clock = new ClockWidget.ClockApp(document.getElementById('myClock'), { width: 500, height: 500, radius: 200, watchFace: 'FACE_3' });
 </script>
 ```
 
